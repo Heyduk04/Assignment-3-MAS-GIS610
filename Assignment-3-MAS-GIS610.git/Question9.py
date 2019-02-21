@@ -25,28 +25,26 @@ for x in featureClass:
 inFeatures = 'Waves'
 fieldName1 = 'ref_ID'
 
-arcpy.AddField_management('Waves', 'ref_ID',"LONG") 
+arcpy.AddField_management('Waves', 'ref_ID','TEXT') 
 
 
-#I was able to complete all the previous steps for Question 9, but continued to get errors regarding line 39 for domain name. 
-#I've tried to redefine my domain name numerous times but was still unable to get the code to process.
 arcpy.env.workspace = r'C:\Users\theyduk\Desktop\Heyduk_LabWork\610 Assignments\MAS-GIS\Test.gdb'
 
 current_workspace = r'C:\Users\theyduk\Desktop\Heyduk_LabWork\610 Assignments\MAS-GIS\Test.gdb'
 
 arcpy.env.overwriteOutput = True
 
-gdb = r'C:\Users\theyduk\Desktop\Heyduk_LabWork\610 Assignments\MAS-GIS\Test.gdb'
+
 domName = 'bluesClues'
 
-arcpy.CreateDomain_management(current_workspace, gdb, 'bluesClues','TEXT','CODED')
+arcpy.CreateDomain_management(current_workspace, 'bluesClues3','','TEXT','CODED')
 
 domDict = {'BL':'Blue','GR':'Green','RD':'Red','PR':'Purple','YW':'Yellow'}
 
 for code in domDict:
-    arcpy.AddCodedValueToDomain_management(gdb,'bluesClues',code,domDict[code])
+    arcpy.AddCodedValueToDomain_management(current_workspace,'bluesClues3',code,domDict[code])
 
-arcpy.AssignDomainToField_management('Waves','gdb','ref_ID','bluesClues')
+arcpy.AssignDomainToField_management('Waves','ref_ID','bluesClues3')
 
 
 
